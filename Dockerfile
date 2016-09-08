@@ -6,8 +6,5 @@ RUN apk add --no-cache \
 	lighttpd-mod_auth \
 	lighttpd-mod_webdav
 
-COPY webdav.conf /etc/lighttpd
-COPY webdav.sh $START_PATH
-
-RUN echo 'include "webdav.conf"' >> /etc/lighttpd/lighttpd.conf \
-	&& sed -i '/server.modules = (/a\    "mod_auth",\'$'\n    "mod_webdav",' /etc/lighttpd/lighttpd.conf
+COPY 20-webdav.sh $START_PATH
+COPY 20-webdav.conf $CONF_PATH
